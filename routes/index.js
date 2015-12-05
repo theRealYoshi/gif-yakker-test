@@ -1,12 +1,12 @@
 var express = require('express');
 var browserify = require('browserify');
 var React = require('react');
-var jsx = require('node-jsx'); 
+var jsx = require('node-jsx');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { name: 'John' });
 });
 
 /* GET Hello World page. */
