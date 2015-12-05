@@ -1,14 +1,17 @@
 var React = require('react');
+var jsx = require('node-jsx');
+var SearchBar = require('./searchbar')
 var DefaultLayout = require('./layouts/default');
 
-var HelloMessage = React.createClass({
+var App = React.createClass({
   render: function() {
     return (
       <DefaultLayout title={this.props.title}>
-        <div>Hello {this.props.name}</div>
+        <SearchBar />
       </DefaultLayout>
     );
   }
 });
 
-module.exports = HelloMessage;
+
+module.exports = App;

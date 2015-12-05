@@ -11,7 +11,7 @@ router.get('/gif', function(req, res) {
     // makes call to giphy api anagramized
     // resets cache
     makeGiphyCall(function(result){
-      console.log(result);
+      console.log(result); // return
     });
     //res.render('users', {"users": data});
 });
@@ -20,16 +20,14 @@ router.get('/gif', function(req, res) {
 
 var makeGiphyCall = function(callback){
   var data;
-  setTimeout(function(){
-    request.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=dc6zaTOxFJmzC&limit=5",function(error, response, body) {
-      console.log("running");
-      if (!error && response.statusCode == 200) {
-        callback(body); // Show the HTML for the Google homepage.
-      } else {
-        callback("No results found");
-      }
-    });
-  },0)
+  request.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=dc6zaTOxFJmzC&limit=5",function(error, response, body) {
+    console.log("running");
+    if (!error && response.statusCode == 200) {
+      callback(body); // Show the HTML for the Google homepage.
+    } else {
+      callback(error);
+    }
+  });
 
 }
 
