@@ -16,8 +16,7 @@ if (process.env.REDISTOGO_URL) {
     var redis = require("redis").createClient(rtg.port, rtg.hostname);
     redis.auth(rtg.auth.split(":")[1]);
 } else {
-    var redis = require("redis")
-    var client = redis.createClient(); // creates new client
+    var redis = require("redis").createClient();
 }
 
 var routes = require('./routes/index');
@@ -42,8 +41,9 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
+
 // Connect to Redis server
-client.on('connect', function() {
+redis.on('connect', function() {
     console.log('connected');
 });
 
@@ -58,7 +58,7 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-client.on('error', function (err) {
+redis.on('error', function (err) {
   console.log('Error ' + err);
 });
 
