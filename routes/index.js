@@ -10,22 +10,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { name: 'John' });
 });
 
-/* GET api request from giphy page. */
-router.get('/api/gif', function(req, res) {
-    // check redis cache first if not there
-    // makes call to giphy api anagramized
-    // resets cache
-    request("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=dc6zaTOxFJmzC&limit=5",function(error, response, body) {
-      if (!error && response.statusCode == 200) {
-        console.log(body) // Show the HTML for the Google homepage.
-      }
-    });
-    // console.log(xhr);
-    // xhr.done(function(data) { console.log("success got data", data); });
-    //res.render('users', {"users": data});
-});
-
-
 //
 // /* GET Hello World page. */
 // router.get('/helloworld', function(req, res) {
