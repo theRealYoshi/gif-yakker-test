@@ -44,7 +44,11 @@ app.use(function(req,res,next){
 
 // Connect to Redis server
 redis.on('connect', function() {
-    console.log('connected');
+    console.log('connected to Redis');
+});
+// error handlers
+redis.on('error', function (err) {
+  console.log('Error ' + err);
 });
 
 app.use('/', routes);
@@ -57,10 +61,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
-redis.on('error', function (err) {
-  console.log('Error ' + err);
-});
 
 // development error handler
 // will print stacktrace

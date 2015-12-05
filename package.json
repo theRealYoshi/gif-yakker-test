@@ -14,6 +14,8 @@
     "mongodb": "~2.0.33",
     "monk": "git+https://github.com/vccabral/monk.git",
     "morgan": "~1.5.3",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
     "serve-favicon": "~2.2.1"
   }
 }
