@@ -10,6 +10,16 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/test1');
 
+// Redis
+if (process.env.REDISTOGO_URL) {
+    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+    var redis = require("redis").createClient(rtg.port, rtg.hostname);
+    redis.auth(rtg.auth.split(":")[1]);
+} else {
+    var redis = require("redis")
+    var client = redis.createClient(); // creates new client
+}
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -32,6 +42,10 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
+// Connect to Redis server
+client.on('connect', function() {
+    console.log('connected');
+});
 
 app.use('/', routes);
 app.use('/users', users);
@@ -44,6 +58,9 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+client.on('error', function (err) {
+  console.log('Error ' + err);
+});
 
 // development error handler
 // will print stacktrace
